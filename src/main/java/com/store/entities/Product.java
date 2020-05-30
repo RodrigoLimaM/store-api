@@ -33,7 +33,9 @@ public class Product implements Serializable {
     @Column(name = "product_name", nullable = false)
     private String name;
 
-
+    @NonNull
+    @Column(name = "product_quantity", nullable = false)
+    private Integer quantity;
 
     @NonNull
     @Column(name = "product_price", nullable = false)
