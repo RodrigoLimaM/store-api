@@ -29,7 +29,7 @@ public class SalesmanController {
     SalesmanService salesmanService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Salesman>> getSalesman() {
+    public ResponseEntity<List<Salesman>> getSalesmans() {
         return ResponseEntity.ok().body(salesmanService.findAll());
     }
 
