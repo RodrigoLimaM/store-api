@@ -28,4 +28,9 @@ public class SalesmanServiceImpl implements SalesmanService {
     public List<Salesman> findAll() {
         return salesmanRepository.findAll();
     }
+
+    @Override
+    public Salesman findById(Integer id) {
+        return salesmanRepository.findById(id).orElse(null);
+    }
 }

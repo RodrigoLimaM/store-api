@@ -9,4 +9,6 @@ public interface SalesmanService {
     Salesman save(SalesmanDTO dto);
 
     List<Salesman> findAll();
+
+    Salesman findById(Integer id);
 }

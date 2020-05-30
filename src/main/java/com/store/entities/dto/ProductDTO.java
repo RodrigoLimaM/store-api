@@ -1,5 +1,6 @@
 package com.store.entities.dto;
 
+import com.store.entities.Salesman;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,32 +9,31 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class SalesmanDTO implements Serializable {
+public class ProductDTO implements Serializable {
 
     private Integer id;
 
-    @NotNull
     @NotBlank
+    @NotNull
     private String name;
 
-    @NotNull
     @NotBlank
-    private Long cpf;
+    @NotNull
+    private BigDecimal price;
 
-    @NotNull
     @NotBlank
-    private String birthDate;
+    @NotNull
+    private String brand;
 
-    @NotNull
     @NotBlank
-    private String email;
+    @NotNull
+    private String description;
 
-    @NotNull
-    @NotBlank
-    private String password;
+    private Salesman salesman;
 }

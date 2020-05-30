@@ -6,9 +6,11 @@ import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -30,11 +32,17 @@ public class SalesmanController {
         return ResponseEntity.ok().body(salesmanService.findAll());
     }
 
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Salesman> getSalesman(
+            @PathVariable Integer id) {
+        return ResponseEntity.ok().body(salesmanService.findById(id));
+    }
+
     @PostMapping
     public ResponseEntity<Salesman> saveSalesman(
             @Valid @RequestBody SalesmanDTO dto) throws URISyntaxException {
         return ResponseEntity
-                .created(new URI("/salesman" +dto.getId()))
+                .created(new URI("/salesman/" +dto.getId()))
                 .body(salesmanService.save(dto));
     }
 }
