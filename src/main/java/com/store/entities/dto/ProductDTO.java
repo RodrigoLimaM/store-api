@@ -25,6 +25,10 @@ public class ProductDTO implements Serializable {
 
     @NotBlank
     @NotNull
+    private Integer quantity;
+
+    @NotBlank
+    @NotNull
     private BigDecimal price;
 
     @NotBlank

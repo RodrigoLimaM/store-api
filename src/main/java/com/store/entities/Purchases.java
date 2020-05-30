@@ -31,6 +31,10 @@ public class Purchases {
     private String name;
 
     @NonNull
+    @Column(name = "product_quantity", nullable = false)
+    private Integer quantity;
+
+    @NonNull
     @Column(name = "product_price", nullable = false)
     private BigDecimal price;
 
