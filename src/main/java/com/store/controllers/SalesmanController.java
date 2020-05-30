@@ -34,7 +34,7 @@ public class SalesmanController {
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Salesman> getSalesman(
+    public ResponseEntity<Salesman> getSalesmanById(
             @PathVariable Integer id) {
         return ResponseEntity.ok().body(salesmanService.findById(id));
     }

@@ -10,4 +10,8 @@ public interface ProductService {
     Product save(ProductDTO dto, Integer id);
 
     List<Product> findAll();
+
+    Product findById(Integer id);
+
+    List<Product> findByName(String name);
 }

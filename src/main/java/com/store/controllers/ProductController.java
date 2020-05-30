@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -28,6 +29,18 @@ public class ProductController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok().body(productService.findAll());
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> getProductById(
+            @PathVariable Integer id) {
+        return ResponseEntity.ok().body(productService.findById(id));
+    }
+
+    @GetMapping(value ="/name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Product>> findProductByName(
+            @RequestParam String name) {
+        return ResponseEntity.ok().body(productService.findByName(name));
     }
 
     @PostMapping(value = "/{id}")
