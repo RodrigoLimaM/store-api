@@ -24,7 +24,7 @@ public class Purchases {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer purchasesId;
 
     @NonNull
     @Column(name = "product_name", nullable = false)

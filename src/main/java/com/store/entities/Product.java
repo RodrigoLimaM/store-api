@@ -1,6 +1,7 @@
 package com.store.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -27,7 +28,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer productId;
 
     @NonNull
     @Column(name = "product_name", nullable = false)
@@ -52,5 +53,6 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "salesman_id")
     @NonNull
+    @ApiModelProperty(hidden = true)
     private Salesman salesman;
 }

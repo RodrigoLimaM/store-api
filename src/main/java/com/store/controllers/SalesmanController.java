@@ -42,7 +42,7 @@ public class SalesmanController {
     public ResponseEntity<Salesman> saveSalesman(
             @Valid @RequestBody SalesmanDTO dto) throws URISyntaxException {
         return ResponseEntity
-                .created(new URI("/salesman/" +dto.getId()))
+                .created(new URI("/salesman"))
                 .body(salesmanService.save(dto));
     }
 }

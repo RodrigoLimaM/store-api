@@ -31,7 +31,7 @@ public class Buyer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer buyerId;
 
     @Column(name = "buyer_name", nullable = false)
     @NonNull

@@ -1,6 +1,7 @@
 package com.store.entities.dto;
 
 import com.store.entities.Salesman;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,27 +18,28 @@ import java.math.BigDecimal;
 @Builder
 public class ProductDTO implements Serializable {
 
-    private Integer id;
-
     @NotBlank
     @NotNull
+    @ApiModelProperty(example = "Playstation 3")
     private String name;
 
     @NotBlank
     @NotNull
+    @ApiModelProperty(example = "3")
     private Integer quantity;
 
     @NotBlank
     @NotNull
+    @ApiModelProperty(example = "820.00")
     private BigDecimal price;
 
     @NotBlank
     @NotNull
+    @ApiModelProperty(example = "Sony")
     private String brand;
 
     @NotBlank
     @NotNull
+    @ApiModelProperty(example = "Pouco usado")
     private String description;
-
-    private Salesman salesman;
 }

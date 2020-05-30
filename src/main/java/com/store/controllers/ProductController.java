@@ -26,7 +26,7 @@ public class ProductController {
     public ResponseEntity<Product> saveProduct(
             @Valid @RequestBody ProductDTO dto, @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity
-                .created(new URI("/product/" +dto.getId()))
+                .created(new URI("/product/" +id))
                 .body(productService.save(dto, id));
     }
 
