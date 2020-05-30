@@ -33,4 +33,22 @@ public class SalesmanServiceImpl implements SalesmanService {
     public Salesman findById(Integer id) {
         return salesmanRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Salesman update(SalesmanDTO dto, Integer id) {
+        Salesman actual = this.findById(id);
+        Salesman updatedSalesman = updateSalesmanFields(dto, actual);
+
+        return salesmanRepository.save(updatedSalesman);
+    }
+
+    private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {
+        actual.setName(dto.getName());
+        actual.setCpf(dto.getCpf());
+        actual.setBirthDate(salesmanMapper.convertDate(dto.getBirthDate()));
+        actual.setEmail(dto.getEmail());
+        actual.setPassword(dto.getPassword());
+
+        return actual;
+    }
 }

@@ -11,4 +11,6 @@ public interface SalesmanService {
     List<Salesman> findAll();
 
     Salesman findById(Integer id);
+
+    Salesman update(SalesmanDTO dto, Integer id);
 }
