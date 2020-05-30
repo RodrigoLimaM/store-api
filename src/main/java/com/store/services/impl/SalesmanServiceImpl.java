@@ -8,6 +8,8 @@ import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SalesmanServiceImpl implements SalesmanService {
 
@@ -20,5 +22,10 @@ public class SalesmanServiceImpl implements SalesmanService {
     @Override
     public Salesman save(SalesmanDTO dto) {
         return salesmanRepository.save(salesmanMapper.mapSalesmanDTOToSalesman(dto));
+    }
+
+    @Override
+    public List<Salesman> findAll() {
+        return salesmanRepository.findAll();
     }
 }
