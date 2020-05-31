@@ -16,4 +16,8 @@ public interface ProductService {
     List<Product> findByName(String name);
 
     Product deleteById(Integer id);
+
+    Product update(Integer id, ProductDTO dto);
+
+    void updateQuantity(Integer productId, Integer quantity);
 }

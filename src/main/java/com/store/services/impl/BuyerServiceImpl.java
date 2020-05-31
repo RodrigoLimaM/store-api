@@ -33,4 +33,11 @@ public class BuyerServiceImpl implements BuyerService {
     public Buyer findById(Integer id) {
         return buyerRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Buyer deleteById(Integer id) {
+        Buyer deletedBuyer = this.findById(id);
+        buyerRepository.deleteById(id);
+        return deletedBuyer;
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +45,7 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.findByName(name));
     }
 
-    @PostMapping(value = "/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Product> saveProduct(
             @Valid @RequestBody ProductDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
@@ -53,7 +54,14 @@ public class ProductController {
                 .body(productService.save(requestBody, id));
     }
 
-    @DeleteMapping(value = "/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable Integer id,
+            @RequestBody ProductDTO requestBody) {
+        return ResponseEntity.ok().body(productService.update(id, requestBody));
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProductById(
             @PathVariable Integer id) {
         return ResponseEntity.ok().body(productService.deleteById(id));

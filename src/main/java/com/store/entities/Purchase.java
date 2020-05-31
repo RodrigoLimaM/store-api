@@ -1,5 +1,6 @@
 package com.store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -36,7 +37,7 @@ public class Purchase {
 
     @NonNull
     @Column(name = "product_quantity", nullable = false)
-    private Integer quantity;
+    private Integer purchasedQuantity;
 
     @NonNull
     @Column(name = "product_price", nullable = false)
@@ -49,10 +50,12 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "salesman_id")
     @NonNull
+    @JsonIgnoreProperties({"creationDate", "updateDate", "birthDate", "email", "password", "products"})
     private Salesman salesman;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
     @NonNull
+    @JsonIgnoreProperties({"creationDate", "updateDate", "birthDate", "email", "password", "purchases"})
     private Buyer buyer;
 }

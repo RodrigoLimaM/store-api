@@ -11,4 +11,6 @@ public interface BuyerService {
     List<Buyer> findAll();
 
     Buyer findById(Integer id);
+
+    Buyer deleteById(Integer id);
 }
