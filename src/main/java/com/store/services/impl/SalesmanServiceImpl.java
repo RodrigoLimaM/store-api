@@ -5,6 +5,7 @@ import com.store.entities.dto.SalesmanDTO;
 import com.store.entities.mapper.SalesmanMapper;
 import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
+import com.store.services.utils.DateConversionService;
 import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class SalesmanServiceImpl implements SalesmanService {
 
     @Autowired
     SalesmanMapper salesmanMapper;
+
+    @Autowired
+    DateConversionService dateConversionService;
 
     @Override
     public Salesman save(SalesmanDTO dto) {
@@ -56,7 +60,7 @@ public class SalesmanServiceImpl implements SalesmanService {
     private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {
         actual.setName(dto.getName());
         actual.setCpf(dto.getCpf());
-        actual.setBirthDate(salesmanMapper.convertDate(dto.getBirthDate()));
+        actual.setBirthDate(dateConversionService.convertDate(dto.getBirthDate()));
         actual.setEmail(dto.getEmail());
         actual.setPassword(dto.getPassword());
 
