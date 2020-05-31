@@ -6,6 +6,7 @@ import com.store.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,10 +46,17 @@ public class ProductController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Product> saveProduct(
-            @Valid @RequestBody ProductDTO dto, @PathVariable Integer id) throws URISyntaxException {
+            @Valid @RequestBody ProductDTO dto,
+            @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity
                 .created(new URI("/product/" +id))
                 .body(productService.save(dto, id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Product> deleteProductById(
+            @PathVariable Integer id) {
+        return ResponseEntity.ok().body(productService.deleteById(id));
     }
 
 }
