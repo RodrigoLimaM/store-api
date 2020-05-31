@@ -8,6 +8,8 @@ import com.store.services.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BuyerServiceImpl implements BuyerService {
 
@@ -20,5 +22,15 @@ public class BuyerServiceImpl implements BuyerService {
     @Override
     public Buyer save(BuyerDTO dto) {
         return buyerRepository.save(buyerMapper.mapBuyerDTOToBuyer(dto));
+    }
+
+    @Override
+    public List<Buyer> findAll() {
+        return buyerRepository.findAll();
+    }
+
+    @Override
+    public Buyer findById(Integer id) {
+        return buyerRepository.findById(id).orElse(null);
     }
 }
