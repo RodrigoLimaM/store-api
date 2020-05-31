@@ -3,6 +3,7 @@ package com.store.services.impl;
 import com.store.entities.Salesman;
 import com.store.entities.dto.SalesmanDTO;
 import com.store.entities.mapper.SalesmanMapper;
+import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
 import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class SalesmanServiceImpl implements SalesmanService {
 
     @Autowired
     SalesmanRepository salesmanRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Autowired
     SalesmanMapper salesmanMapper;
@@ -40,6 +44,13 @@ public class SalesmanServiceImpl implements SalesmanService {
         Salesman updatedSalesman = updateSalesmanFields(dto, actual);
 
         return salesmanRepository.save(updatedSalesman);
+    }
+
+    @Override
+    public Salesman deleteById(Integer id) {
+        Salesman deletedSalesman = this.findById(id);
+        productRepository.deleteBySalesman(deletedSalesman);
+        return deletedSalesman;
     }
 
     private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {

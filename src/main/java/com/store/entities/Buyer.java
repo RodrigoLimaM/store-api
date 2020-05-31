@@ -63,5 +63,5 @@ public class Buyer implements Serializable {
 
     @ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "buyer")
-    private List<Purchases> purchases = new ArrayList<>();
+    private List<Purchase> purchases = new ArrayList<>();
 }

@@ -20,15 +20,19 @@ import java.math.BigDecimal;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Purchases {
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer purchasesId;
+    private Integer purchaseId;
 
     @NonNull
     @Column(name = "product_name", nullable = false)
     private String name;
+
+    @NonNull
+    @Column(name = "product_brand", nullable = false)
+    private String brand;
 
     @NonNull
     @Column(name = "product_quantity", nullable = false)
@@ -39,12 +43,13 @@ public class Purchases {
     private BigDecimal price;
 
     @NonNull
-    @Column(name = "product_brand", nullable = false)
-    private String brand;
+    @Column(name = "total_value", nullable = false)
+    private BigDecimal totalValue;
 
+    @ManyToOne
+    @JoinColumn(name = "salesman_id")
     @NonNull
-    @Column(name = "salesman_name", nullable = false)
-    private String salesmanName;
+    private Salesman salesman;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")

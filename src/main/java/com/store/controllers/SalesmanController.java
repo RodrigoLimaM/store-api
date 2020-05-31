@@ -5,6 +5,7 @@ import com.store.entities.dto.SalesmanDTO;
 import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +53,12 @@ public class SalesmanController {
             @Valid @RequestBody SalesmanDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity.ok().body(salesmanService.update(requestBody, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Salesman> deleteSalesman(
+            @PathVariable Integer id) {
+        return ResponseEntity.ok().body(salesmanService.deleteById(id));
     }
 
 }
