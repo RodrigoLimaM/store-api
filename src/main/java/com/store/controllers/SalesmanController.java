@@ -41,17 +41,17 @@ public class SalesmanController {
 
     @PostMapping
     public ResponseEntity<Salesman> saveSalesman(
-            @Valid @RequestBody SalesmanDTO dto) throws URISyntaxException {
+            @Valid @RequestBody SalesmanDTO requestBody) throws URISyntaxException {
         return ResponseEntity
                 .created(new URI("/salesman"))
-                .body(salesmanService.save(dto));
+                .body(salesmanService.save(requestBody));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Salesman> updateSalesman(
-            @Valid @RequestBody SalesmanDTO dto,
+            @Valid @RequestBody SalesmanDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
-        return ResponseEntity.ok().body(salesmanService.update(dto, id));
+        return ResponseEntity.ok().body(salesmanService.update(requestBody, id));
     }
 
 }

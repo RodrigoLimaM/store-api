@@ -46,11 +46,11 @@ public class ProductController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Product> saveProduct(
-            @Valid @RequestBody ProductDTO dto,
+            @Valid @RequestBody ProductDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity
                 .created(new URI("/product/" +id))
-                .body(productService.save(dto, id));
+                .body(productService.save(requestBody, id));
     }
 
     @DeleteMapping(value = "/{id}")
