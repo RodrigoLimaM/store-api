@@ -7,7 +7,6 @@ import com.store.repositories.PurchaseRepository;
 import com.store.services.BuyerService;
 import com.store.services.ProductService;
 import com.store.services.PurchaseService;
-import com.store.services.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

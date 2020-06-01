@@ -13,4 +13,6 @@ public interface BuyerService {
     Buyer findById(Integer id);
 
     Buyer deleteById(Integer id);
+
+    Buyer update(BuyerDTO dto, Integer id);
 }

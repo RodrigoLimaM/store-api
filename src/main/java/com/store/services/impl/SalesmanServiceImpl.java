@@ -5,12 +5,13 @@ import com.store.entities.dto.SalesmanDTO;
 import com.store.entities.mapper.SalesmanMapper;
 import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
-import com.store.services.utils.DateConversionService;
 import com.store.services.SalesmanService;
+import com.store.services.utils.DateConversionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SalesmanServiceImpl implements SalesmanService {
@@ -55,6 +56,16 @@ public class SalesmanServiceImpl implements SalesmanService {
         Salesman deletedSalesman = this.findById(id);
         productRepository.deleteBySalesman(deletedSalesman);
         return deletedSalesman;
+    }
+
+    @Override
+    public Boolean isLoginValid(String email, String password) {
+        return !salesmanRepository
+                .findAll()
+                .stream()
+                .filter(s -> s.getEmail().equals(email))
+                .filter(s -> s.getPassword().equals(password))
+                .collect(Collectors.toList()).isEmpty();
     }
 
     private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {

@@ -40,6 +40,13 @@ public class SalesmanController {
         return ResponseEntity.ok().body(salesmanService.findById(id));
     }
 
+    @GetMapping(value = "/login", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> isLoginValid(
+            @RequestParam String email,
+            @RequestParam String password) {
+        return ResponseEntity.ok().body(salesmanService.isLoginValid(email, password));
+    }
+
     @PostMapping
     public ResponseEntity<Salesman> saveSalesman(
             @Valid @RequestBody SalesmanDTO requestBody) throws URISyntaxException {
