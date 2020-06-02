@@ -58,16 +58,6 @@ public class SalesmanServiceImpl implements SalesmanService {
         return deletedSalesman;
     }
 
-    @Override
-    public Boolean isLoginValid(String email, String password) {
-        return !salesmanRepository
-                .findAll()
-                .stream()
-                .filter(s -> s.getEmail().equals(email))
-                .filter(s -> s.getPassword().equals(password))
-                .collect(Collectors.toList()).isEmpty();
-    }
-
     private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {
         actual.setName(dto.getName());
         actual.setCpf(dto.getCpf());

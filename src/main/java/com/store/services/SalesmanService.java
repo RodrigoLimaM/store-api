@@ -15,6 +15,4 @@ public interface SalesmanService {
     Salesman update(SalesmanDTO dto, Integer id);
 
     Salesman deleteById(Integer id);
-
-    Boolean isLoginValid(String email, String password);
 }

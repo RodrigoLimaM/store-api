@@ -3,6 +3,7 @@ package com.store.controllers;
 import com.store.entities.Salesman;
 import com.store.entities.dto.SalesmanDTO;
 import com.store.services.SalesmanService;
+import com.store.services.authentication.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,9 @@ public class SalesmanController {
     @Autowired
     SalesmanService salesmanService;
 
+    @Autowired
+    UserAuthenticationService userAuthenticationService;
+
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Salesman>> getSalesmans() {
         return ResponseEntity.ok().body(salesmanService.findAll());
@@ -44,7 +48,7 @@ public class SalesmanController {
     public ResponseEntity<Boolean> isLoginValid(
             @RequestParam String email,
             @RequestParam String password) {
-        return ResponseEntity.ok().body(salesmanService.isLoginValid(email, password));
+        return ResponseEntity.ok().body(userAuthenticationService.isSalesmanLoginValid(email, password));
     }
 
     @PostMapping
