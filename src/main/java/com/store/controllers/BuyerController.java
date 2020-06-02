@@ -36,13 +36,19 @@ public class BuyerController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Buyer>> getBuyers() {
-        return ResponseEntity.ok().body(buyerService.findAll());
+        List<Buyer> response = buyerService.findAll();
+        return response.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Buyer> getBuyerById(
             @PathVariable Integer id) {
-        return ResponseEntity.ok().body(buyerService.findById(id));
+        Buyer response = buyerService.findById(id);
+        return response == (null)
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/login", produces = APPLICATION_JSON_VALUE)

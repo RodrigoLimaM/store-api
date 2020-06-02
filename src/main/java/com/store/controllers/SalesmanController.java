@@ -35,13 +35,19 @@ public class SalesmanController {
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Salesman>> getSalesmans() {
-        return ResponseEntity.ok().body(salesmanService.findAll());
+        List<Salesman> response = salesmanService.findAll();
+        return response.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Salesman> getSalesmanById(
             @PathVariable Integer id) {
-        return ResponseEntity.ok().body(salesmanService.findById(id));
+        Salesman response = salesmanService.findById(id);
+        return response == null
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/login", produces = APPLICATION_JSON_VALUE)
