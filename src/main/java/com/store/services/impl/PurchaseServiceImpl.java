@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
@@ -29,6 +30,11 @@ public class PurchaseServiceImpl implements PurchaseService {
         Purchase purchase = buildPurchase(buyerId, productId, purchasedQuantity);
         productService.updateQuantity(productId, purchasedQuantity);
         return purchaseRepository.save(purchase);
+    }
+
+    @Override
+    public List<Purchase> findAll() {
+        return purchaseRepository.findAll();
     }
 
     private Purchase buildPurchase(Integer buyerId, Integer productId, Integer purchasedQuantity) {

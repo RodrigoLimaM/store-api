@@ -1,6 +1,5 @@
 package com.store.entities.dto;
 
-import com.store.entities.Salesman;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

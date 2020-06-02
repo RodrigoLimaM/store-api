@@ -30,19 +30,28 @@ public class ProductController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> getProducts() {
-        return ResponseEntity.ok().body(productService.findAll());
+        List<Product> response = productService.findAll();
+        return response.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> getProductById(
             @PathVariable Integer id) {
-        return ResponseEntity.ok().body(productService.findById(id));
+        Product response = productService.findById(id);
+        return response == null
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value ="/name", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> findProductByName(
             @RequestParam String name) {
-        return ResponseEntity.ok().body(productService.findByName(name));
+        List<Product> response = productService.findByName(name);
+        return response.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/{id}")
