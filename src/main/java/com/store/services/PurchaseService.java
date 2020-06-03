@@ -8,4 +8,6 @@ public interface PurchaseService {
     Purchase save(Integer buyerId, Integer productId, Integer quantity);
 
     List<Purchase> findAll();
+
+    Purchase findById(Integer id);
 }

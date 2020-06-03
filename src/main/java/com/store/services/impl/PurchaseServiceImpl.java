@@ -37,6 +37,11 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findAll();
     }
 
+    @Override
+    public Purchase findById(Integer id) {
+        return purchaseRepository.findById(id).orElse(null);
+    }
+
     private Purchase buildPurchase(Integer buyerId, Integer productId, Integer purchasedQuantity) {
         Product purchasedProduct = productService.findById(productId);
         Buyer buyer = buyerService.findById(buyerId);

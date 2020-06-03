@@ -22,9 +22,18 @@ public class PurchaseController {
     PurchaseService purchaseService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Purchase>> getPuchases() {
+    public ResponseEntity<List<Purchase>> getPurchases() {
         List<Purchase> response = purchaseService.findAll();
         return response.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Purchase> getPurchase(
+            @PathVariable Integer id) {
+        Purchase response = purchaseService.findById(id);
+        return response == null
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.ok().body(response);
     }
