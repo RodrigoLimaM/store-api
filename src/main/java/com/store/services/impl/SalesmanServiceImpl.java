@@ -3,6 +3,8 @@ package com.store.services.impl;
 import com.store.entities.Salesman;
 import com.store.entities.dto.SalesmanDTO;
 import com.store.entities.mapper.SalesmanMapper;
+import com.store.exception.InvalidPasswordException;
+import com.store.exception.NoDataFoundException;
 import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
 import com.store.services.SalesmanService;
@@ -29,17 +31,22 @@ public class SalesmanServiceImpl implements SalesmanService {
 
     @Override
     public Salesman save(SalesmanDTO dto) {
+        if (dto.getPassword().length() < 8)
+            throw new InvalidPasswordException();
         return salesmanRepository.save(salesmanMapper.mapSalesmanDTOToSalesman(dto));
     }
 
     @Override
     public List<Salesman> findAll() {
-        return salesmanRepository.findAll();
+        var response = salesmanRepository.findAll();
+        if (response.isEmpty())
+            throw new NoDataFoundException();
+        return response;
     }
 
     @Override
     public Salesman findById(Integer id) {
-        return salesmanRepository.findById(id).orElse(null);
+        return salesmanRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
     }
 
     @Override

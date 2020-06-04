@@ -3,6 +3,8 @@ package com.store.services.impl;
 import com.store.entities.Buyer;
 import com.store.entities.dto.BuyerDTO;
 import com.store.entities.mapper.BuyerMapper;
+import com.store.exception.InvalidPasswordException;
+import com.store.exception.NoDataFoundException;
 import com.store.repositories.BuyerRepository;
 import com.store.services.BuyerService;
 import com.store.services.utils.DateConversionService;
@@ -25,17 +27,22 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public Buyer save(BuyerDTO dto) {
+        if (dto.getPassword().length() < 8)
+            throw new InvalidPasswordException();
         return buyerRepository.save(buyerMapper.mapBuyerDTOToBuyer(dto));
     }
 
     @Override
     public List<Buyer> findAll() {
-        return buyerRepository.findAll();
+        var response = buyerRepository.findAll();
+        if (response.isEmpty())
+            throw new NoDataFoundException();
+        return response;
     }
 
     @Override
     public Buyer findById(Integer id) {
-        return buyerRepository.findById(id).orElse(null);
+        return buyerRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
     }
 
     @Override

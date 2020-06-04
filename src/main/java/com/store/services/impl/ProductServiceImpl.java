@@ -3,6 +3,7 @@ package com.store.services.impl;
 import com.store.entities.Product;
 import com.store.entities.dto.ProductDTO;
 import com.store.entities.mapper.ProductMapper;
+import com.store.exception.NoDataFoundException;
 import com.store.repositories.ProductRepository;
 import com.store.services.ProductService;
 import com.store.services.SalesmanService;
@@ -30,17 +31,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        var response = productRepository.findAll();
+        if (response.isEmpty())
+            throw new NoDataFoundException();
+        return response;
     }
 
     @Override
     public Product findById(Integer id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
     }
 
     @Override
     public List<Product> findByName(String name) {
-        return productRepository.findProductByNameContainingIgnoreCase(name);
+        var response = productRepository.findProductByNameContainingIgnoreCase(name);
+        if (response.isEmpty())
+            throw new NoDataFoundException();
+        return response;
     }
 
     @Override
