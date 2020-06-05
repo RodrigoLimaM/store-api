@@ -43,7 +43,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public Purchase findById(Integer id) {
-        return purchaseRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
+        return purchaseRepository.findById(id).orElseThrow(NoDataFoundException::new);
     }
 
     private Purchase buildPurchase(Integer buyerId, Integer productId, Integer purchasedQuantity) {

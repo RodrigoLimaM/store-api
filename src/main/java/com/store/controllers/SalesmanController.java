@@ -41,7 +41,6 @@ public class SalesmanController {
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Salesman> getSalesmanById(
             @PathVariable Integer id) {
-        Salesman response = salesmanService.findById(id);
         return ResponseEntity.ok().body(salesmanService.findById(id));
     }
 
@@ -63,7 +62,7 @@ public class SalesmanController {
     @PutMapping("/{id}")
     public ResponseEntity<Salesman> updateSalesman(
             @Valid @RequestBody UserDTO requestBody,
-            @PathVariable Integer id) throws URISyntaxException {
+            @PathVariable Integer id) {
         return ResponseEntity.ok().body(salesmanService.update(requestBody, id));
     }
 

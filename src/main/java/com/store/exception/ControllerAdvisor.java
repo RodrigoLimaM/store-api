@@ -16,6 +16,16 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
 
+    @ExceptionHandler(InvalidDateException.class)
+    public ResponseEntity<Object> handleInvalidDateException() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", BAD_REQUEST.value());
+        body.put("message", "Invalid date");
+
+        return new ResponseEntity<>(body, BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidEmailException.class)
     public ResponseEntity<Object> handleInvalidEmailException() {
         Map<String, Object> body = new LinkedHashMap<>();

@@ -63,7 +63,7 @@ public class BuyerController {
     @PutMapping("/{id}")
     public ResponseEntity<Buyer> updateBuyer(
             @Valid @RequestBody UserDTO requestBody,
-            @PathVariable Integer id) throws URISyntaxException {
+            @PathVariable Integer id) {
         return ResponseEntity.ok().body(buyerService.update(requestBody, id));
     }
 

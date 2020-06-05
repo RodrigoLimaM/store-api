@@ -59,7 +59,7 @@ public class SalesmanServiceImpl implements SalesmanService {
 
     @Override
     public Salesman findById(Integer id) {
-        return salesmanRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
+        return salesmanRepository.findById(id).orElseThrow(NoDataFoundException::new);
     }
 
     @Override

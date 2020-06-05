@@ -56,7 +56,7 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public Buyer findById(Integer id) {
-        return buyerRepository.findById(id).orElseThrow(() -> new NoDataFoundException());
+        return buyerRepository.findById(id).orElseThrow(NoDataFoundException::new);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class DateConversionService {
 
     public LocalDate convertDate(String date) {
         String[] yearMonthDay = date.split("/");
-        return LocalDate.of( stringToInt(yearMonthDay[2]) ,
+        return LocalDate.of(stringToInt(yearMonthDay[2]) ,
                 stringToInt(yearMonthDay[1]),
                 stringToInt(yearMonthDay[0]));
     }
