@@ -2,12 +2,15 @@ package com.store.services.impl;
 
 import com.store.entities.Buyer;
 import com.store.entities.dto.BuyerDTO;
+import com.store.entities.dto.ToValidateFieldsDTO;
 import com.store.entities.mapper.BuyerMapper;
+import com.store.exception.InvalidCPFException;
 import com.store.exception.InvalidPasswordException;
 import com.store.exception.NoDataFoundException;
 import com.store.repositories.BuyerRepository;
 import com.store.services.BuyerService;
 import com.store.services.utils.DateConversionService;
+import com.store.services.utils.FieldsValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +28,21 @@ public class BuyerServiceImpl implements BuyerService {
     @Autowired
     DateConversionService dateConversionService;
 
+    @Autowired
+    FieldsValidatorService fieldsValidatorService;
+
     @Override
     public Buyer save(BuyerDTO dto) {
-        if (dto.getPassword().length() < 8)
-            throw new InvalidPasswordException();
+        fieldsValidatorService.isFieldsValid(ToValidateFieldsDTO
+                .builder()
+                .cpf(dto.getCpf())
+                .birthDate(dto.getBirthDate())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build());
         return buyerRepository.save(buyerMapper.mapBuyerDTOToBuyer(dto));
     }
+
 
     @Override
     public List<Buyer> findAll() {

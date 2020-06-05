@@ -20,13 +20,13 @@ public class BuyerMapperTest {
     @Test
     public void mapBuyerDTOToBuyer() {
         Buyer expected = new Buyer("teste",
-                987654321L,
+                "89085288061",
                 LocalDate.of(1990, 1, 1),
                 "test@test.com",
                 "12345678");
 
         BuyerDTO newBuyerDTO = new BuyerDTO("teste",
-                987654321L,
+                "89085288061",
                 "01/01/1990",
                 "test@test.com",
                 "12345678");

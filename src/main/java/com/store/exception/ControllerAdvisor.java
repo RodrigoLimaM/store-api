@@ -15,6 +15,17 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
+
+    @ExceptionHandler(InvalidEmailException.class)
+    public ResponseEntity<Object> handleInvalidEmailException() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", BAD_REQUEST.value());
+        body.put("message", "Invalid e-mail");
+
+        return new ResponseEntity<>(body, BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidPasswordException.class)
     public ResponseEntity<Object> handleInvalidPasswordException() {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -25,9 +36,18 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidCPFException.class)
+    public ResponseEntity<Object> handleInvalidCPFException() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", BAD_REQUEST.value());
+        body.put("message", "Invalid CPF");
+
+        return new ResponseEntity<>(body, BAD_REQUEST);
+    }
+
     @ExceptionHandler(NoDataFoundException.class)
     public ResponseEntity<Object> handleNoDataFoundException() {
-
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", NOT_FOUND.value());

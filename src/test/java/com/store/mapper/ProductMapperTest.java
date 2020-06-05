@@ -20,9 +20,18 @@ public class ProductMapperTest {
 
     @Test
     public void mapProductDTOToProduct() {
-        Product expected = new Product("Teste", 3, new BigDecimal(1000.00),"teste", "teste teste", new Salesman());
+        Product expected = new Product("Teste",
+                3,
+                new BigDecimal(1000.00),
+                "teste",
+                "teste teste",
+                new Salesman());
 
-        ProductDTO newProductDTO = new ProductDTO("Teste", 3, new BigDecimal(1000.00), "teste", "teste teste");
+        ProductDTO newProductDTO = new ProductDTO("Teste",
+                3,
+                new BigDecimal(1000.00),
+                "teste",
+                "teste teste");
 
         Product actual = productMapper.mapProductDTOToProduct(newProductDTO, new Salesman());
 

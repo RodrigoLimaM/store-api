@@ -45,9 +45,8 @@ public class Salesman implements Serializable {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
-    @NonNull
     @Column(name = "salesman_cpf", nullable = false)
-    private Long cpf;
+    private @NonNull String cpf;
 
     @NonNull
     @Column(name = "salesman_birth_date", nullable = false)

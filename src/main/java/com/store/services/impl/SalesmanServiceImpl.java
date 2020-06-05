@@ -2,6 +2,7 @@ package com.store.services.impl;
 
 import com.store.entities.Salesman;
 import com.store.entities.dto.SalesmanDTO;
+import com.store.entities.dto.ToValidateFieldsDTO;
 import com.store.entities.mapper.SalesmanMapper;
 import com.store.exception.InvalidPasswordException;
 import com.store.exception.NoDataFoundException;
@@ -9,6 +10,7 @@ import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
 import com.store.services.SalesmanService;
 import com.store.services.utils.DateConversionService;
+import com.store.services.utils.FieldsValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +31,18 @@ public class SalesmanServiceImpl implements SalesmanService {
     @Autowired
     DateConversionService dateConversionService;
 
+    @Autowired
+    FieldsValidatorService fieldsValidatorService;
+
     @Override
     public Salesman save(SalesmanDTO dto) {
-        if (dto.getPassword().length() < 8)
-            throw new InvalidPasswordException();
+        fieldsValidatorService.isFieldsValid(ToValidateFieldsDTO
+                .builder()
+                .cpf(dto.getCpf())
+                .birthDate(dto.getBirthDate())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build());
         return salesmanRepository.save(salesmanMapper.mapSalesmanDTOToSalesman(dto));
     }
 

@@ -23,8 +23,8 @@ public class BuyerDTO implements Serializable {
 
     @NotBlank
     @NotNull
-    @ApiModelProperty(example = "123987456")
-    private Long cpf;
+    @ApiModelProperty(example = "89085288061")
+    private String cpf;
 
     @NotBlank
     @NotNull
