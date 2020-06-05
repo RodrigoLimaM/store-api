@@ -17,7 +17,7 @@ public class FieldsValidatorService {
         return passwordValidator(dto.getPassword()) && cpfValidator(dto.getCpf()) && emailValidator(dto.getEmail());
     }
 
-    private boolean emailValidator(String email) {
+    Boolean emailValidator(String email) {
         try {
             InternetAddress emailAddress = new InternetAddress(email);
             emailAddress.validate();
@@ -27,17 +27,17 @@ public class FieldsValidatorService {
         return true;
     }
 
-    private Boolean passwordValidator(String password) {
+    Boolean passwordValidator(String password) {
         if (password.length() < 8)
             throw new InvalidPasswordException();
         return true;
     }
 
-    private Boolean cpfValidator(String cpf) {
+    Boolean cpfValidator(String cpf) {
         int sum = 0;
         int mod;
 
-        if (cpf == "00000000000" || cpf.length() != 11)
+        if (cpf.equals("00000000000") || cpf.length() != 11)
             throw new InvalidCPFException();
 
         for (int i = 1; i <= 9; i++)

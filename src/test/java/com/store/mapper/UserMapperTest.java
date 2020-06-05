@@ -1,8 +1,8 @@
 package com.store.mapper;
 
 import com.store.entities.Buyer;
-import com.store.entities.dto.BuyerDTO;
-import com.store.entities.mapper.BuyerMapper;
+import com.store.entities.dto.UserDTO;
+import com.store.entities.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,10 +12,10 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class BuyerMapperTest {
+public class UserMapperTest {
 
     @Autowired
-    BuyerMapper buyerMapper;
+    UserMapper userMapper;
 
     @Test
     public void mapBuyerDTOToBuyer() {
@@ -25,13 +25,13 @@ public class BuyerMapperTest {
                 "test@test.com",
                 "12345678");
 
-        BuyerDTO newBuyerDTO = new BuyerDTO("teste",
+        UserDTO newBuyerDTO = new UserDTO("teste",
                 "89085288061",
                 "01/01/1990",
                 "test@test.com",
                 "12345678");
 
-        Buyer actual = buyerMapper.mapBuyerDTOToBuyer(newBuyerDTO);
+        Buyer actual = userMapper.mapBuyerDTOToBuyer(newBuyerDTO);
 
         assertEquals(expected, actual);
     }

@@ -1,7 +1,7 @@
 package com.store.controllers;
 
 import com.store.entities.Salesman;
-import com.store.entities.dto.SalesmanDTO;
+import com.store.entities.dto.UserDTO;
 import com.store.services.SalesmanService;
 import com.store.services.authentication.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class SalesmanController {
 
     @PostMapping
     public ResponseEntity<Salesman> saveSalesman(
-            @Valid @RequestBody SalesmanDTO requestBody) throws URISyntaxException {
+            @Valid @RequestBody UserDTO requestBody) throws URISyntaxException {
         return ResponseEntity
                 .created(new URI("/salesman"))
                 .body(salesmanService.save(requestBody));
@@ -62,7 +62,7 @@ public class SalesmanController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Salesman> updateSalesman(
-            @Valid @RequestBody SalesmanDTO requestBody,
+            @Valid @RequestBody UserDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity.ok().body(salesmanService.update(requestBody, id));
     }

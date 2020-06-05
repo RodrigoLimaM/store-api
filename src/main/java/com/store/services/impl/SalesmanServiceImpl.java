@@ -1,10 +1,9 @@
 package com.store.services.impl;
 
 import com.store.entities.Salesman;
-import com.store.entities.dto.SalesmanDTO;
 import com.store.entities.dto.ToValidateFieldsDTO;
-import com.store.entities.mapper.SalesmanMapper;
-import com.store.exception.InvalidPasswordException;
+import com.store.entities.dto.UserDTO;
+import com.store.entities.mapper.UserMapper;
 import com.store.exception.NoDataFoundException;
 import com.store.repositories.ProductRepository;
 import com.store.repositories.SalesmanRepository;
@@ -26,7 +25,7 @@ public class SalesmanServiceImpl implements SalesmanService {
     ProductRepository productRepository;
 
     @Autowired
-    SalesmanMapper salesmanMapper;
+    UserMapper userMapper;
 
     @Autowired
     DateConversionService dateConversionService;
@@ -35,7 +34,12 @@ public class SalesmanServiceImpl implements SalesmanService {
     FieldsValidatorService fieldsValidatorService;
 
     @Override
-    public Salesman save(SalesmanDTO dto) {
+    public Salesman save(UserDTO dto) {
+        dtoFieldsValidation(dto);
+        return salesmanRepository.save(userMapper.mapSalesmanDTOToSalesman(dto));
+    }
+
+    private void dtoFieldsValidation(UserDTO dto) {
         fieldsValidatorService.isFieldsValid(ToValidateFieldsDTO
                 .builder()
                 .cpf(dto.getCpf())
@@ -43,7 +47,6 @@ public class SalesmanServiceImpl implements SalesmanService {
                 .email(dto.getEmail())
                 .password(dto.getPassword())
                 .build());
-        return salesmanRepository.save(salesmanMapper.mapSalesmanDTOToSalesman(dto));
     }
 
     @Override
@@ -60,7 +63,8 @@ public class SalesmanServiceImpl implements SalesmanService {
     }
 
     @Override
-    public Salesman update(SalesmanDTO dto, Integer id) {
+    public Salesman update(UserDTO dto, Integer id) {
+        dtoFieldsValidation(dto);
         Salesman actual = this.findById(id);
         Salesman updatedSalesman = updateSalesmanFields(dto, actual);
 
@@ -74,7 +78,7 @@ public class SalesmanServiceImpl implements SalesmanService {
         return deletedSalesman;
     }
 
-    private Salesman updateSalesmanFields(SalesmanDTO dto, Salesman actual) {
+    private Salesman updateSalesmanFields(UserDTO dto, Salesman actual) {
         actual.setName(dto.getName());
         actual.setCpf(dto.getCpf());
         actual.setBirthDate(dateConversionService.convertDate(dto.getBirthDate()));

@@ -1,11 +1,9 @@
 package com.store.services.impl;
 
 import com.store.entities.Buyer;
-import com.store.entities.dto.BuyerDTO;
 import com.store.entities.dto.ToValidateFieldsDTO;
-import com.store.entities.mapper.BuyerMapper;
-import com.store.exception.InvalidCPFException;
-import com.store.exception.InvalidPasswordException;
+import com.store.entities.dto.UserDTO;
+import com.store.entities.mapper.UserMapper;
 import com.store.exception.NoDataFoundException;
 import com.store.repositories.BuyerRepository;
 import com.store.services.BuyerService;
@@ -23,7 +21,7 @@ public class BuyerServiceImpl implements BuyerService {
     BuyerRepository buyerRepository;
 
     @Autowired
-    BuyerMapper buyerMapper;
+    UserMapper userMapper;
 
     @Autowired
     DateConversionService dateConversionService;
@@ -32,7 +30,12 @@ public class BuyerServiceImpl implements BuyerService {
     FieldsValidatorService fieldsValidatorService;
 
     @Override
-    public Buyer save(BuyerDTO dto) {
+    public Buyer save(UserDTO dto) {
+        dtoFieldsValidation(dto);
+        return buyerRepository.save(userMapper.mapBuyerDTOToBuyer(dto));
+    }
+
+    private void dtoFieldsValidation(UserDTO dto) {
         fieldsValidatorService.isFieldsValid(ToValidateFieldsDTO
                 .builder()
                 .cpf(dto.getCpf())
@@ -40,7 +43,6 @@ public class BuyerServiceImpl implements BuyerService {
                 .email(dto.getEmail())
                 .password(dto.getPassword())
                 .build());
-        return buyerRepository.save(buyerMapper.mapBuyerDTOToBuyer(dto));
     }
 
 
@@ -65,14 +67,21 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public Buyer update(BuyerDTO dto, Integer id) {
+    public Buyer update(UserDTO dto, Integer id) {
+        fieldsValidatorService.isFieldsValid(ToValidateFieldsDTO
+                .builder()
+                .cpf(dto.getCpf())
+                .birthDate(dto.getBirthDate())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build());
         Buyer actual = this.findById(id);
         Buyer updatedBuyer = updateBuyerFields(dto, actual);
 
         return buyerRepository.save(updatedBuyer);
     }
 
-    private Buyer updateBuyerFields(BuyerDTO dto, Buyer actual) {
+    private Buyer updateBuyerFields(UserDTO dto, Buyer actual) {
         actual.setName(dto.getName());
         actual.setBirthDate(dateConversionService.convertDate(dto.getBirthDate()));
         actual.setCpf(dto.getCpf());

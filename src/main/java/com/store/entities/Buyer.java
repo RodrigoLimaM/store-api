@@ -45,8 +45,9 @@ public class Buyer implements Serializable {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
+    @NonNull
     @Column(name = "buyer_cpf", nullable = false)
-    private @NonNull String cpf;
+    private String cpf;
 
     @NonNull
     @Column(name = "buyer_birth_date", nullable = false)

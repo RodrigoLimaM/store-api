@@ -1,7 +1,7 @@
 package com.store.controllers;
 
 import com.store.entities.Buyer;
-import com.store.entities.dto.BuyerDTO;
+import com.store.entities.dto.UserDTO;
 import com.store.services.BuyerService;
 import com.store.services.authentication.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class BuyerController {
 
     @PostMapping
     public ResponseEntity<Buyer> saveBuyer(
-            @Valid @RequestBody BuyerDTO requestBody) throws URISyntaxException {
+            @Valid @RequestBody UserDTO requestBody) throws URISyntaxException {
         return ResponseEntity
                 .created(new URI("/buyer"))
                 .body(buyerService.save(requestBody));
@@ -62,7 +62,7 @@ public class BuyerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Buyer> updateBuyer(
-            @Valid @RequestBody BuyerDTO requestBody,
+            @Valid @RequestBody UserDTO requestBody,
             @PathVariable Integer id) throws URISyntaxException {
         return ResponseEntity.ok().body(buyerService.update(requestBody, id));
     }

@@ -14,30 +14,30 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Data
 @Builder
-public class SalesmanDTO implements Serializable {
+public class UserDTO implements Serializable {
 
-    @NotNull
     @NotBlank
-    @ApiModelProperty(example = "Renato Andrade")
+    @NotNull
+    @ApiModelProperty(example = "Vinicius Jardim")
     private String name;
 
     @NotBlank
     @NotNull
-    @ApiModelProperty(example = "89085288061")
+    @ApiModelProperty(example = "04747444009")
     private String cpf;
 
-    @NotNull
     @NotBlank
-    @ApiModelProperty(example = "07/09/1999")
+    @NotNull
+    @ApiModelProperty(example = "01/01/1990")
     private String birthDate;
 
-    @NotNull
     @NotBlank
-    @ApiModelProperty(example = "renatin20@hotmail.com")
+    @NotNull
+    @ApiModelProperty(example = "vinizao@hotmail.com")
     private String email;
 
-    @NotNull
     @NotBlank
-    @ApiModelProperty(example = "larysales01")
+    @NotNull
+    @ApiModelProperty(example = "helo1234")
     private String password;
 }
