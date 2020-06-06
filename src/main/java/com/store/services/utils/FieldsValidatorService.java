@@ -34,7 +34,7 @@ public class FieldsValidatorService {
         return true;
     }
 
-    boolean ageValidator(String date) {
+    private boolean ageValidator(String date) {
         LocalDate currentDate = LocalDate.now();
         int age = Period.between(dateConversionService.convertDate(date), currentDate).getYears();
         return age > 17;
