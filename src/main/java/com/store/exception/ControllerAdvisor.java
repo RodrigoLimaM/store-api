@@ -16,6 +16,16 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
 
+    @ExceptionHandler(InvalidPurchaseException.class)
+    public ResponseEntity<Object> handleInvalidPurchaseException() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", BAD_REQUEST.value());
+        body.put("message", "Invalid purchase quantity");
+
+        return new ResponseEntity<>(body, BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidDateException.class)
     public ResponseEntity<Object> handleInvalidDateException() {
         Map<String, Object> body = new LinkedHashMap<>();

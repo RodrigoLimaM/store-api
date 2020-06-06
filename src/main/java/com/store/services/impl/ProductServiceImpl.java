@@ -3,6 +3,7 @@ package com.store.services.impl;
 import com.store.entities.Product;
 import com.store.entities.dto.ProductDTO;
 import com.store.entities.mapper.ProductMapper;
+import com.store.exception.InvalidPurchaseException;
 import com.store.exception.NoDataFoundException;
 import com.store.repositories.ProductRepository;
 import com.store.services.ProductService;
@@ -65,9 +66,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateQuantity(Integer productId, Integer quantity) {
+    public void updateQuantity(Integer productId, Integer purchasedQuantity) {
         Product updatedProduct = this.findById(productId);
-        updatedProduct.setQuantity(updatedProduct.getQuantity() - quantity);
+        if (purchasedQuantity > updatedProduct.getQuantity() || purchasedQuantity < 1)
+            throw new InvalidPurchaseException();
+        updatedProduct.setQuantity(updatedProduct.getQuantity() - purchasedQuantity);
         productRepository.save(updatedProduct);
     }
 
